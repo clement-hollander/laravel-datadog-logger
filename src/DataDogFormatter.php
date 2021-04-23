@@ -40,13 +40,11 @@ class DataDogFormatter extends JsonFormatter
             $record['published_date'] = $dateTimeObj->format(DateTime::ISO8601);
         }
 
-        if (isset($record['level_name'])) {
-            $record['status'] = $record['level_name'];
-        }
-        $record['ddsource'] = 'php-' . php_sapi_name();
-        $record['source']   = 'php-' . php_sapi_name();
-        $record['service']  = config('app.name');
-        $record['hostname'] = gethostname();
+        $record['application'] = 'connectors';
+        $record['channel']     = 'connectors';
+        $record['source']      = 'application';
+        $record['service']     = 'application';
+        $record['hostname']    = gethostname();
 
         return parent::format($record);
     }
